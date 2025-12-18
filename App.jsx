@@ -1,9 +1,10 @@
-import AttendanceTracker from "./FullStack/React/AttendenceTracker";
+import TaskListDashboard from "./FullStack/React/TaskListDashboard";
+
 
 export default function App() {
-  return (
-    <div>
-      <AttendanceTracker />
-    </div>
-  );
+return (
+<div>
+<TaskListDashboard />
+</div>
+);
 }
