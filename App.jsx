@@ -1,12 +1,11 @@
-import PollingSystem from "./FullStack/React/PollingSystem";
+import CourseEnrollment from "./FullStack/React/CourseEnrollment";
 
 function App() {
   return (
     <div>
-      <PollingSystem />
+      <CourseEnrollment />
     </div>
   );
 }
 
 export default App;
-
