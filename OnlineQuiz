@@ -1,0 +1,92 @@
+import { useState } from "react";
+
+const quizData = [
+  {
+    question: "What is the capital of India?",
+    options: ["Mumbai", "Delhi", "Chennai", "Kolkata"],
+    answer: "Delhi",
+  },
+  {
+    question: "Which language is used for React?",
+    options: ["Python", "Java", "JavaScript", "C++"],
+    answer: "JavaScript",
+  },
+  {
+    question: "Which hook is used for state in React?",
+    options: ["useEffect", "useState", "useRef", "useContext"],
+    answer: "useState",
+  },
+];
+
+export default function OnlineQuiz() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+
+  const handleOptionClick = (option) => {
+    if (option === quizData[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < quizData.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setShowResult(true);
+    }
+  };
+
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowResult(false);
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>Online Quiz</h2>
+
+      {showResult ? (
+        <>
+          <h3>Your Score: {score} / {quizData.length}</h3>
+          <button onClick={restartQuiz}>Restart Quiz</button>
+        </>
+      ) : (
+        <>
+          <h4>
+            Question {currentQuestion + 1} of {quizData.length}
+          </h4>
+          <p>{quizData[currentQuestion].question}</p>
+
+          {quizData[currentQuestion].options.map((option) => (
+            <button
+              key={option}
+              onClick={() => handleOptionClick(option)}
+              style={styles.button}
+            >
+              {option}
+            </button>
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    maxWidth: "400px",
+    margin: "50px auto",
+    padding: "20px",
+    textAlign: "center",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+  },
+  button: {
+    display: "block",
+    width: "100%",
+    padding: "10px",
+    margin: "8px 0",
+    cursor: "pointer",
+  },
+};
