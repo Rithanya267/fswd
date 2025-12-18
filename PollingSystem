@@ -1,0 +1,114 @@
+import { useState } from "react";
+
+const pollQuestion = {
+  question: "Which topic should we revise next?",
+  options: ["React Hooks", "JavaScript Basics", "CSS", "Node.js"],
+};
+
+export default function PollingSystem() {
+  const [votes, setVotes] = useState(
+    pollQuestion.options.reduce((acc, option) => {
+      acc[option] = 0;
+      return acc;
+    }, {})
+  );
+
+  const [hasVoted, setHasVoted] = useState(false);
+
+  const handleVote = (option) => {
+    if (!hasVoted) {
+      setVotes({
+        ...votes,
+        [option]: votes[option] + 1,
+      });
+      setHasVoted(true);
+    }
+  };
+
+  const totalVotes = Object.values(votes).reduce(
+    (sum, v) => sum + v,
+    0
+  );
+
+  return (
+    <div style={styles.container}>
+      <h2>📊 Classroom Poll</h2>
+      <h4>{pollQuestion.question}</h4>
+
+      {!hasVoted ? (
+        pollQuestion.options.map((option) => (
+          <button
+            key={option}
+            style={styles.button}
+            onClick={() => handleVote(option)}
+          >
+            {option}
+          </button>
+        ))
+      ) : (
+        <div style={styles.results}>
+          {pollQuestion.options.map((option) => {
+            const percentage =
+              totalVotes === 0
+                ? 0
+                : ((votes[option] / totalVotes) * 100).toFixed(1);
+
+            return (
+              <div key={option} style={styles.resultRow}>
+                <span>{option}</span>
+                <div style={styles.barContainer}>
+                  <div
+                    style={{
+                      ...styles.bar,
+                      width: `${percentage}%`,
+                    }}
+                  ></div>
+                </div>
+                <span>{percentage}%</span>
+              </div>
+            );
+          })}
+          <p>Total Votes: {totalVotes}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    maxWidth: "500px",
+    margin: "50px auto",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    textAlign: "center",
+  },
+  button: {
+    display: "block",
+    width: "100%",
+    padding: "10px",
+    margin: "8px 0",
+    cursor: "pointer",
+  },
+  results: {
+    marginTop: "20px",
+  },
+  resultRow: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "10px",
+    gap: "10px",
+  },
+  barContainer: {
+    flex: 1,
+    height: "12px",
+    backgroundColor: "#eee",
+    borderRadius: "6px",
+    overflow: "hidden",
+  },
+  bar: {
+    height: "100%",
+    backgroundColor: "#4caf50",
+  },
+};
