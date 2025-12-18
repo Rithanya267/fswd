@@ -1,14 +1,12 @@
-
-import React from "react";
-import TicketBookingForm from "./Fullstackproject/TicketBooking";
-import "./App.css";
+import PollingSystem from "./FullStack/React/PollingSystem";
 
 function App() {
   return (
     <div>
-      <TicketBookingForm />
+      <PollingSystem />
     </div>
   );
 }
 
 export default App;
+
