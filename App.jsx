@@ -1,11 +1,9 @@
-import CourseEnrollment from "./FullStack/React/CourseEnrollment";
+import FeedbackInterface from "./FullStack/React/FeedbackInterface";
 
-function App() {
+export default function App() {
   return (
     <div>
-      <CourseEnrollment />
+      <FeedbackInterface />
     </div>
   );
 }
-
-export default App;
