@@ -1,9 +1,9 @@
-import FeedbackInterface from "./FullStack/React/FeedbackInterface";
+import AttendanceTracker from "./FullStack/React/AttendenceTracker";
 
 export default function App() {
   return (
     <div>
-      <FeedbackInterface />
+      <AttendanceTracker />
     </div>
   );
 }
